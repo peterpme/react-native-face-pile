@@ -1,17 +1,21 @@
 // @flow
 import React from 'react'
+import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes'
 import { View, Text, Image, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row-reverse',
+    flexWrap: 'nowrap',
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eee'
+    alignSelf: 'center'
   },
   circle: {
     width: 20,
     height: 20,
-    borderRadius: 10
+    borderRadius: 10,
+    marginBottom: 20
   },
   avatar: {
     width: 40,
@@ -25,17 +29,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#b6c0ca',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 7
+    marginLeft: 9
   },
   extraLabel: {
     color: '#333',
-    fontSize: 14
+    fontSize: 12
   }
 })
 
 function renderFace (face, index) {
   return (
-    <View key={index} style={styles.circle}>
+    <View key={face.id || index} style={styles.circle}>
       <Image
         style={styles.avatar}
         source={{ uri: face.imageUrl }}
@@ -45,12 +49,12 @@ function renderFace (face, index) {
   )
 }
 
-function renderAdditionalFaces (additionalFaces) {
+function renderoverflow (overflow) {
   return (
     <View style={styles.circle}>
       <View style={[styles.avatar, styles.extra]}>
         <Text style={styles.extraLabel}>
-          +{additionalFaces}
+          +{overflow}
         </Text>
       </View>
     </View>
@@ -58,17 +62,19 @@ function renderAdditionalFaces (additionalFaces) {
 }
 
 type Face = {
-  imageUrl: string
+  imageUrl: string,
+  id?: string
 }
 
 type FacePileType = {
   faces: Array<Face>,
-  additionalFaces: number
+  overflow: number,
+  containerStyle?: StyleObj
 }
 
-const FacePile = ({ faces, additionalFaces }: FacePileType) =>
-  <View style={styles.container}>
-    {renderAdditionalFaces(additionalFaces)}
+const FacePile = ({ faces, overflow, containerStyle }: FacePileType) =>
+  <View style={[styles.container, containerStyle]}>
+    {renderoverflow(overflow)}
     {faces.map(renderFace)}
   </View>
 
@@ -87,7 +93,7 @@ FacePile.defaultProps = {
       imageUrl: 'https://lorempixel.com/200/202/people'
     }
   ],
-  additionalFaces: 8
+  overflow: 8
 }
 
 export default FacePile
