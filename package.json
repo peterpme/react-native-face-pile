@@ -1,6 +1,6 @@
 {
   "name": "react-native-face-pile",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Facepiles! Faces on faces on faces",
   "main": "src/index.js",
   "repository": "git@github.com:peterpme/react-native-face-pile.git",
