@@ -21,11 +21,20 @@ import FacePile from 'react-native-face-pile'
 
 const FACES = [
   {
-    imageUrl: ''
+    imageUrl: 'https://lorempixel.com/200/200/people'
+  },
+  {
+    imageUrl: 'https://lorempixel.com/200/203/people'
+  },
+  {
+    imageUrl: 'https://lorempixel.com/200/201/people'
+  },
+  {
+    imageUrl: 'https://lorempixel.com/200/202/people'
   }
 ]
 
-
+// ...
 
 <FacePile faces={FACES} additionalFaces={10} />
 
