@@ -2,6 +2,8 @@
 
 A group of overlapping round avatars are called face piles.
 
+![Facepile Image](/screenshots/facepiles.png)
+
 ## Installation
 
 ```
