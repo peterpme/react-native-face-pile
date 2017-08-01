@@ -1,13 +1,17 @@
 {
   "name": "react-native-face-pile",
   "version": "1.0.1",
-  "description": "Facepiles! Faces on faces on faces",
+  "description": "A group of overlapping circular avatars called face piles for your React Native app",
   "main": "src/index.js",
   "repository": "git@github.com:peterpme/react-native-face-pile.git",
   "author": "Peter Piekarczyk <peterpiekarczyk@gmail.com>",
   "keywords": [
     "facepile",
-    "react-native"
+    "face-pile",
+    "react-native",
+    "avatar-group",
+    "avatar-list",
+    "circle-avatar-list"
   ],
   "license": "MIT",
   "peerDependencies": {

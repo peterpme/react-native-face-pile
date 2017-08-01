@@ -1,6 +1,6 @@
 # React Native Face Pile
 
-A pile of faces for all of your face-piling needs.
+A group of overlapping round avatars are called face piles.
 
 ## Installation
 
