@@ -17,13 +17,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20
   },
-  avatar: {
+  avatarContainer: {
     width: 40,
     height: 40,
     borderRadius: 20,
     borderColor: 'white',
     borderWidth: 1.5,
     borderStyle: 'solid'
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
   extra: {
     backgroundColor: '#b6c0ca',
@@ -40,11 +45,13 @@ const styles = StyleSheet.create({
 function renderFace (face, index) {
   return (
     <View key={face.id || index} style={styles.circle}>
-      <Image
-        style={styles.avatar}
-        source={{ uri: face.imageUrl }}
-        resizeMode='contain'
-      />
+      <View style={styles.avatarContainer}>
+        <Image
+          style={styles.avatar}
+          source={{ uri: face.imageUrl }}
+          resizeMode='contain'
+        />
+      </View>
     </View>
   )
 }
