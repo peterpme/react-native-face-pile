@@ -38,8 +38,20 @@ const FACES = [
 
 // ...
 
-<FacePile faces={FACES} additionalFaces={10} />
+<FacePile faces={FACES} overflow={10} />
 
 ```
 
 ## Proptypes
+
+```es6
+faces: PropTypes.shape({
+  imageUrl: PropTypes.string
+}),
+overflow: PropTypes.number,
+circleHeight: PropTypes.number,
+circleWidth: PropTypes.number,
+containerStyle: PropTypes.style,
+circleStyle: PropTypes.style,
+overflowStyle: PropTypes.styles
+```

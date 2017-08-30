@@ -5,6 +5,9 @@
   "main": "src/index.js",
   "repository": "git@github.com:peterpme/react-native-face-pile.git",
   "author": "Peter Piekarczyk <peterpiekarczyk@gmail.com>",
+  "scripts": {
+    "release": "npm version patch && npm publish && git push --tags"
+  },
   "keywords": [
     "facepile",
     "face-pile",
@@ -17,5 +20,8 @@
   "peerDependencies": {
     "react": "^15.6.1",
     "react-native": "^0.46.4"
+  },
+  "devDependencies": {
+    "prop-types": "^15.5.10"
   }
 }
