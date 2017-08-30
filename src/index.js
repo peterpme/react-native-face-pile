@@ -1,9 +1,6 @@
-// @flow
-
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text, Image, StyleSheet, Animated } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
@@ -14,61 +11,94 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   circle: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
     marginBottom: 20
   },
-  avatarContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderColor: 'white',
-    borderWidth: 1.5,
-    borderStyle: 'solid'
+  circleImage: {
+    borderWidth: 2,
+    borderColor: 'white'
   },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20
-  },
-  extra: {
+  overflow: {
     backgroundColor: '#b6c0ca',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 9
+    marginLeft: 5
   },
-  extraLabel: {
-    color: '#333',
-    fontSize: 12
+  overflowLabel: {
+    color: '#fff',
+    fontSize: 14,
+    letterSpacing: -1,
+    marginLeft: 3,
+    fontWeight: 'bold'
   }
-});
+})
 
-type Face = {
-  imageUrl: string,
-  id?: string
-};
+class Circle extends PureComponent {
+  state = {
+    fadeAnim: new Animated.Value(0)
+  }
 
-type FacePileType = {
-  faces: Array<Face>,
-  overflow: number,
-  containerStyle?: StyleObj
-};
+  componentDidMount () {
+    const { delay } = this.props
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      delay
+    }).start()
+  }
 
-class FacePile extends PureComponent {
+  render () {
+    const { fadeAnim } = this.state
+    const { circleStyle, imageStyle, circleSize, face } = this.props
+
+    const borderRadius = circleSize / 2
+    const innerCircleSize = circleSize * 2
+    return (
+      <Animated.View
+        style={[
+          styles.circle,
+          {
+            width: circleSize,
+            height: circleSize,
+            borderRadius: borderRadius,
+            opacity: fadeAnim
+          },
+          circleStyle
+        ]}
+      >
+        <Image
+          style={[
+            styles.circleImage,
+            {
+              width: innerCircleSize,
+              height: innerCircleSize,
+              borderRadius: circleSize
+            },
+            imageStyle
+          ]}
+          source={{ uri: face.imageUrl }}
+          resizeMode='contain'
+        />
+      </Animated.View>
+    )
+  }
+}
+
+export default class FacePile extends PureComponent {
   static propTypes = {
     faces: PropTypes.shape({
       imageUrl: PropTypes.string
     }),
+    circleSize: PropTypes.number,
     overflow: PropTypes.number,
-    circleHeight: PropTypes.number,
-    circleWidth: PropTypes.number,
-    containerStyle: PropTypes.style,
-    circleStyle: PropTypes.style,
-    overflowStyle: PropTypes.styles
-  };
+    containerStyle: PropTypes.instanceOf(StyleSheet),
+    circleStyle: PropTypes.instanceOf(StyleSheet),
+    imageStyle: PropTypes.instanceOf(StyleSheet),
+    overflowStyle: PropTypes.instanceOf(StyleSheet),
+    overflowLabelStyle: PropTypes.instanceOf(StyleSheet)
+  }
 
   static defaultProps = {
+    circleSize: 20,
     faces: [
       {
         imageUrl: 'https://lorempixel.com/200/200/people'
@@ -84,46 +114,75 @@ class FacePile extends PureComponent {
       }
     ],
     overflow: 8
-  };
+  }
 
   _renderOverflowCircle = overflow => {
-    const { overflowStyle } = this.props;
+    const {
+      circleStyle,
+      overflowStyle,
+      overflowLabelStyle,
+      circleSize
+    } = this.props
+    const innerCircleSize = circleSize * 2
+
     return (
-      <View style={styles.circle}>
-        <View style={[styles.avatar, styles.extra, overflowStyle]}>
-          <Text style={styles.extraLabel}>
+      <View
+        style={[
+          styles.circle,
+          { width: circleSize, height: circleSize },
+          circleStyle
+        ]}
+      >
+        <View
+          style={[
+            styles.overflow,
+            {
+              width: innerCircleSize,
+              height: innerCircleSize,
+              borderRadius: circleSize
+            },
+            overflowStyle
+          ]}
+        >
+          <Text
+            style={[
+              styles.overflowLabel,
+              {
+                fontSize: circleSize * 0.7
+              },
+              overflowLabelStyle
+            ]}
+          >
             +{overflow}
           </Text>
         </View>
       </View>
-    );
-  };
+    )
+  }
 
-  _renderFace = face => {
-    const { circleStyle, circleHeight, circleWidth } = this.props
-    if (!face.imageUrl) return null;
+  _renderFace = (face, index, arr) => {
+    const { circleStyle, imageStyle, circleSize } = this.props
+    if (!face.imageUrl) return null
+
     return (
-      <View key={face.id || index} style={styles.circle}>
-        <View style={[styles.avatarContainer, circleStyle, { width: circleWidth, height: circleHeight }]}>
-          <Image
-            style={[styles.avatar, { width: circleWidth / 2, height: circleHeight / 2}]}
-            source={{ uri: face.imageUrl }}
-            resizeMode="contain"
-          />
-        </View>
-      </View>
-    );
-  };
+      <Circle
+        key={face.id || index}
+        delay={(arr.length - index) * 2}
+        face={face}
+        circleStyle={circleStyle}
+        imageStyle={imageStyle}
+        circleSize={circleSize}
+      />
+    )
+  }
 
-  render() {
-    const { faces, overflow, containerStyle } = this.props;
+  render () {
+    const { faces, overflow, containerStyle } = this.props
     return (
       <View style={[styles.container, containerStyle]}>
         {this._renderOverflowCircle(overflow)}
         {faces.map(this._renderFace)}
       </View>
-    );
+    )
   }
 }
-
-export default FacePile;
