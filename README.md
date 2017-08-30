@@ -19,8 +19,6 @@ npm install --save react-native-face-pile
 ```es6
 import FacePile from 'react-native-face-pile'
 
-// ...
-
 const FACES = [
   {
     imageUrl: 'https://lorempixel.com/200/200/people'
@@ -36,13 +34,10 @@ const FACES = [
   }
 ]
 
-// ...
-
 <FacePile faces={FACES} overflow={10} />
-
 ```
 
-## Proptypes
+## Prop types
 
 ```es6
 faces: PropTypes.shape({
