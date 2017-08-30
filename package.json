@@ -6,7 +6,7 @@
   "repository": "git@github.com:peterpme/react-native-face-pile.git",
   "author": "Peter Piekarczyk <peterpiekarczyk@gmail.com>",
   "scripts": {
-    "release": "npm version patch && npm publish && git push --tags"
+    "release": "npm publish && git push --tags"
   },
   "keywords": [
     "facepile",
