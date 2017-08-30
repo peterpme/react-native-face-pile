@@ -43,10 +43,11 @@ const FACES = [
 faces: PropTypes.shape({
   imageUrl: PropTypes.string
 }),
-overflow: PropTypes.number,
-circleHeight: PropTypes.number,
-circleWidth: PropTypes.number,
-containerStyle: PropTypes.style,
-circleStyle: PropTypes.style,
-overflowStyle: PropTypes.styles
+circleSize: PropTypes.number, // 20, 40, 60, etc.
+overflow: PropTypes.number, // # of additional faces (+3, etc.)
+containerStyle: PropTypes.instanceOf(StyleSheet), // overall container style
+circleStyle: PropTypes.instanceOf(StyleSheet), // override default circle styles
+imageStyle: PropTypes.instanceOf(StyleSheet), // override default image styles
+overflowStyle: PropTypes.instanceOf(StyleSheet), // override default overflow circle styles
+overflowLabelStyle: PropTypes.instanceOf(StyleSheet) // override default overflow label (+8) styles
 ```
