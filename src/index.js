@@ -85,9 +85,11 @@ class Circle extends PureComponent {
 
 export default class FacePile extends PureComponent {
   static propTypes = {
-    faces: PropTypes.shape({
-      imageUrl: PropTypes.string
-    }),
+    faces: PropTypes.arrayOf(
+      PropTypes.shape({
+        imageUrl: PropTypes.string,
+      })
+    ),
     circleSize: PropTypes.number,
     overflow: PropTypes.number,
     hideOverflow: PropTpyes.bool,
