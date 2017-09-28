@@ -92,7 +92,7 @@ export default class FacePile extends PureComponent {
     ),
     circleSize: PropTypes.number,
     overflow: PropTypes.number,
-    hideOverflow: PropTpyes.bool,
+    hideOverflow: PropTypes.bool,
     containerStyle: PropTypes.instanceOf(StyleSheet),
     circleStyle: PropTypes.instanceOf(StyleSheet),
     imageStyle: PropTypes.instanceOf(StyleSheet),
