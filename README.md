@@ -2,6 +2,9 @@
 
 A group of overlapping round avatars are called face piles.
 
+[![npm version](https://badge.fury.io/js/react-native-face-pile.svg)](https://badge.fury.io/js/react-native-face-pile)
+
+
 ![Facepile Image](/screenshots/facepiles.png)
 
 ## Installation
