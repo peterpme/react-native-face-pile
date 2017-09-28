@@ -90,6 +90,7 @@ export default class FacePile extends PureComponent {
     }),
     circleSize: PropTypes.number,
     overflow: PropTypes.number,
+    hideOverflow: PropTpyes.bool,
     containerStyle: PropTypes.instanceOf(StyleSheet),
     circleStyle: PropTypes.instanceOf(StyleSheet),
     imageStyle: PropTypes.instanceOf(StyleSheet),
@@ -99,6 +100,7 @@ export default class FacePile extends PureComponent {
 
   static defaultProps = {
     circleSize: 20,
+    hideOverflow: false,
     faces: [
       {
         imageUrl: 'https://lorempixel.com/200/200/people'
@@ -177,10 +179,10 @@ export default class FacePile extends PureComponent {
   }
 
   render () {
-    const { faces, overflow, containerStyle } = this.props
+    const { faces, overflow, hideOverflow, containerStyle } = this.props
     return (
       <View style={[styles.container, containerStyle]}>
-        {overflow > 0 && this._renderOverflowCircle(overflow)}
+        {(overflow > 0 && !hideOverflow) && this._renderOverflowCircle(overflow)}
         {faces.map(this._renderFace)}
       </View>
     )

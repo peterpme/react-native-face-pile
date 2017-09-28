@@ -36,6 +36,8 @@ const FACES = [
 
 <FacePile faces={FACES} overflow={10} />
 ```
+- If overflow is 0 then you won't see the circle with ( +4 )
+- If you want to hide the ( +4 ) regardless, you can pass `hideOverflow`
 
 ## Prop types
 
@@ -45,6 +47,7 @@ faces: PropTypes.shape({
 }),
 circleSize: PropTypes.number, // 20, 40, 60, etc.
 overflow: PropTypes.number, // # of additional faces (+3, etc.)
+hideOverflow: PropTypes.bool,
 containerStyle: PropTypes.instanceOf(StyleSheet), // overall container style
 circleStyle: PropTypes.instanceOf(StyleSheet), // override default circle styles
 imageStyle: PropTypes.instanceOf(StyleSheet), // override default image styles
