@@ -180,7 +180,7 @@ export default class FacePile extends PureComponent {
     const { faces, overflow, containerStyle } = this.props
     return (
       <View style={[styles.container, containerStyle]}>
-        {this._renderOverflowCircle(overflow)}
+        {overflow > 0 && this._renderOverflowCircle(overflow)}
         {faces.map(this._renderFace)}
       </View>
     )
