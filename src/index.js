@@ -83,6 +83,22 @@ class Circle extends PureComponent {
   }
 }
 
+export function renderFacePile (faces = [], numFaces) {
+  const entities = [...faces]
+  if (!entities.length) return null
+
+  const facesWithImageUrls = entities.filter(e => e.imageUrl)
+  if (!facesWithImageUrls.length) return null
+
+  const facesToRender = facesWithImageUrls.slice(0, numFaces + 1)
+  const overflow = facesWithImageUrls.length - facesToRender.length
+
+  return {
+    facesToRender,
+    overflow
+  }
+}
+
 export default class FacePile extends PureComponent {
   static propTypes = {
     faces: PropTypes.arrayOf(
@@ -97,27 +113,14 @@ export default class FacePile extends PureComponent {
     circleStyle: PropTypes.instanceOf(StyleSheet),
     imageStyle: PropTypes.instanceOf(StyleSheet),
     overflowStyle: PropTypes.instanceOf(StyleSheet),
-    overflowLabelStyle: PropTypes.instanceOf(StyleSheet)
+    overflowLabelStyle: PropTypes.instanceOf(StyleSheet),
+    render: PropTypes.func,
+    numFaces: PropTypes.number,
   }
 
   static defaultProps = {
     circleSize: 20,
     hideOverflow: false,
-    faces: [
-      {
-        imageUrl: 'https://lorempixel.com/200/200/people'
-      },
-      {
-        imageUrl: 'https://lorempixel.com/200/203/people'
-      },
-      {
-        imageUrl: 'https://lorempixel.com/200/201/people'
-      },
-      {
-        imageUrl: 'https://lorempixel.com/200/202/people'
-      }
-    ],
-    overflow: 8
   }
 
   _renderOverflowCircle = overflow => {
@@ -181,11 +184,15 @@ export default class FacePile extends PureComponent {
   }
 
   render () {
-    const { faces, overflow, hideOverflow, containerStyle } = this.props
+    const { faces, numFaces, overflow, hideOverflow, containerStyle } = this.props
+    if (render) return render({faces, numFaces})
+
+    const { firstFour, overflow } = renderFacePile(faces, numFaces)
+
     return (
       <View style={[styles.container, containerStyle]}>
         {(overflow > 0 && !hideOverflow) && this._renderOverflowCircle(overflow)}
-        {faces.map(this._renderFace)}
+        {firstFour.map(this._renderFace)}
       </View>
     )
   }
