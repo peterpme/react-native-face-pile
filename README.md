@@ -21,15 +21,19 @@ import FacePile from 'react-native-face-pile'
 
 const FACES = [
   {
+    id: 0,
     imageUrl: 'https://lorempixel.com/200/200/people'
   },
   {
+    id: 1,
     imageUrl: 'https://lorempixel.com/200/203/people'
   },
   {
+    id: 2,
     imageUrl: 'https://lorempixel.com/200/201/people'
   },
   {
+    id: 3,
     imageUrl: 'https://lorempixel.com/200/202/people'
   }
 ]
@@ -42,7 +46,10 @@ const FACES = [
 ## Prop types
 
 ```es6
+render: PropTypes.func, // optional render method, otherwise we take control
+numFaces: PropTypes.number, // number of faces you want to render. The rest is subtracted
 faces: PropTypes.shape({
+  id: PropTypes.string,
   imageUrl: PropTypes.string
 }),
 circleSize: PropTypes.number, // 20, 40, 60, etc.
