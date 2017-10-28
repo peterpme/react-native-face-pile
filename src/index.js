@@ -41,7 +41,7 @@ class Circle extends PureComponent {
     const { delay } = this.props
     Animated.timing(this.state.fadeAnim, {
       toValue: 1,
-      duration: 1000,
+      duration: 600,
       delay
     }).start()
   }
