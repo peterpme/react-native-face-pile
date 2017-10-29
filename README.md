@@ -38,10 +38,12 @@ const FACES = [
   }
 ]
 
-<FacePile faces={FACES} overflow={10} />
+<FacePile numFaces={3} faces={FACES} />
 ```
-- If overflow is 0 then you won't see the circle with ( +4 )
-- If you want to hide the ( +4 ) regardless, you can pass `hideOverflow`
+- Pass in your array of faces, then the number you want to render.
+- If you want to hide the overflow, pass in `hideOverflow` (boolean)
+- If you don't want FacePile to figure out what to render, you can pass in your own `render` method:
+  `render=({ numFaces, faces }) => { do whatever you want here }`
 
 ## Prop types
 
