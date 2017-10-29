@@ -184,7 +184,7 @@ export default class FacePile extends PureComponent {
   }
 
   render () {
-    const { faces, numFaces, overflow, hideOverflow, containerStyle } = this.props
+    const { faces, numFaces, hideOverflow, containerStyle } = this.props
     if (render) return render({faces, numFaces})
 
     const { firstFour, overflow } = renderFacePile(faces, numFaces)
