@@ -90,7 +90,7 @@ export function renderFacePile (faces = [], numFaces) {
   const facesWithImageUrls = entities.filter(e => e.imageUrl)
   if (!facesWithImageUrls.length) return null
 
-  const facesToRender = facesWithImageUrls.slice(0, numFaces + 1)
+  const facesToRender = facesWithImageUrls.slice(0, numFaces)
   const overflow = facesWithImageUrls.length - facesToRender.length
 
   return {
@@ -103,11 +103,10 @@ export default class FacePile extends PureComponent {
   static propTypes = {
     faces: PropTypes.arrayOf(
       PropTypes.shape({
-        imageUrl: PropTypes.string,
+        imageUrl: PropTypes.string
       })
     ),
     circleSize: PropTypes.number,
-    overflow: PropTypes.number,
     hideOverflow: PropTypes.bool,
     containerStyle: PropTypes.instanceOf(StyleSheet),
     circleStyle: PropTypes.instanceOf(StyleSheet),
@@ -115,12 +114,12 @@ export default class FacePile extends PureComponent {
     overflowStyle: PropTypes.instanceOf(StyleSheet),
     overflowLabelStyle: PropTypes.instanceOf(StyleSheet),
     render: PropTypes.func,
-    numFaces: PropTypes.number,
+    numFaces: PropTypes.number
   }
 
   static defaultProps = {
     circleSize: 20,
-    hideOverflow: false,
+    hideOverflow: false
   }
 
   _renderOverflowCircle = overflow => {
@@ -185,14 +184,14 @@ export default class FacePile extends PureComponent {
 
   render () {
     const { render, faces, numFaces, hideOverflow, containerStyle } = this.props
-    if (render) return render({faces, numFaces})
+    if (render) return render({ faces, numFaces })
 
-    const { firstFour, overflow } = renderFacePile(faces, numFaces)
+    const { facesToRender, overflow } = renderFacePile(faces, numFaces)
 
     return (
       <View style={[styles.container, containerStyle]}>
-        {(overflow > 0 && !hideOverflow) && this._renderOverflowCircle(overflow)}
-        {firstFour.map(this._renderFace)}
+        {overflow > 0 && !hideOverflow && this._renderOverflowCircle(overflow)}
+        {facesToRender.map(this._renderFace)}
       </View>
     )
   }
