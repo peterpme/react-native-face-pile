@@ -1,6 +1,6 @@
 {
   "name": "react-native-face-pile",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A group of overlapping circular avatars called face piles for your React Native app",
   "main": "src/index.js",
   "repository": "git@github.com:peterpme/react-native-face-pile.git",
