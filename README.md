@@ -53,13 +53,12 @@ const FACES = [
 ```es6
 render: PropTypes.func, // optional render method, otherwise we take control
 numFaces: PropTypes.number, // number of faces you want to render. The rest is subtracted
+hideOverflow: PropTypes.bool, // whether or not to show the +2 extra faces
 faces: PropTypes.shape({
   id: PropTypes.string,
   imageUrl: PropTypes.string
 }),
 circleSize: PropTypes.number, // 20, 40, 60, etc.
-overflow: PropTypes.number, // # of additional faces (+3, etc.)
-hideOverflow: PropTypes.bool,
 containerStyle: PropTypes.instanceOf(StyleSheet), // overall container style
 circleStyle: PropTypes.instanceOf(StyleSheet), // override default circle styles
 imageStyle: PropTypes.instanceOf(StyleSheet), // override default image styles
