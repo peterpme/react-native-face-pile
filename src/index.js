@@ -48,10 +48,13 @@ class Circle extends PureComponent {
 
   render () {
     const { fadeAnim } = this.state
-    const { circleStyle, imageStyle, circleSize, face } = this.props
+    const { circleStyle, imageStyle, circleSize, face, overlap } = this.props
 
     const borderRadius = circleSize / 2
     const innerCircleSize = circleSize * 2
+
+    const marginRight = circleSize - (circleSize * 2 * overlap)
+
     return (
       <Animated.View
         style={[
@@ -60,7 +63,8 @@ class Circle extends PureComponent {
             width: circleSize,
             height: circleSize,
             borderRadius: borderRadius,
-            opacity: fadeAnim
+            opacity: fadeAnim,
+            marginRight
           },
           circleStyle
         ]}
@@ -114,12 +118,14 @@ export default class FacePile extends PureComponent {
     overflowStyle: PropTypes.instanceOf(StyleSheet),
     overflowLabelStyle: PropTypes.instanceOf(StyleSheet),
     render: PropTypes.func,
-    numFaces: PropTypes.number
+    numFaces: PropTypes.number,
+    overlap: PropTypes.number
   }
 
   static defaultProps = {
     circleSize: 20,
-    hideOverflow: false
+    hideOverflow: false,
+    overlap: 0.5
   }
 
   _renderOverflowCircle = overflow => {
@@ -167,7 +173,7 @@ export default class FacePile extends PureComponent {
   }
 
   _renderFace = (face, index, arr) => {
-    const { circleStyle, imageStyle, circleSize } = this.props
+    const { circleStyle, imageStyle, circleSize, overlap } = this.props
     if (!face.imageUrl) return null
 
     return (
@@ -178,12 +184,13 @@ export default class FacePile extends PureComponent {
         circleStyle={circleStyle}
         imageStyle={imageStyle}
         circleSize={circleSize}
+        overlap={overlap}
       />
     )
   }
 
   render () {
-    const { render, faces, numFaces, hideOverflow, containerStyle } = this.props
+    const { render, faces, numFaces, hideOverflow, containerStyle, overlap } = this.props
     if (render) return render({ faces, numFaces })
 
     const { facesToRender, overflow } = renderFacePile(faces, numFaces)
