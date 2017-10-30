@@ -54,6 +54,7 @@ const FACES = [
 render: PropTypes.func, // optional render method, otherwise we take control
 numFaces: PropTypes.number, // number of faces you want to render. The rest is subtracted
 hideOverflow: PropTypes.bool, // whether or not to show the +2 extra faces
+overlap: PropTypes.number, // optional amount of overlap of faces (between 0 and 1), defaults to 0.5
 faces: PropTypes.shape({
   id: PropTypes.string,
   imageUrl: PropTypes.string
