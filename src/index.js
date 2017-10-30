@@ -98,7 +98,7 @@ export function renderFacePile (faces = [], numFaces) {
   if (!facesWithImageUrls.length) return null
 
   const facesToRender = facesWithImageUrls.slice(0, numFaces)
-  const overflow = facesWithImageUrls.length - facesToRender.length
+  const overflow = entities.length - facesToRender.length
 
   return {
     facesToRender,

@@ -44,6 +44,7 @@ const FACES = [
 <FacePile numFaces={3} faces={FACES} />
 ```
 - Pass in your array of faces, then the number you want to render.
+- Any faces exceeding `numFaces`, or faces without images, will show up under the overflow (a circle with, for example, `+3` after the faces)
 - If you want to hide the overflow, pass in `hideOverflow` (boolean)
 - If you don't want FacePile to figure out what to render, you can pass in your own `render` method:
   `render=({ numFaces, faces }) => { do whatever you want here }`
