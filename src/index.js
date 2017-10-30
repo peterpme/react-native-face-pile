@@ -53,7 +53,10 @@ class Circle extends PureComponent {
     const borderRadius = circleSize / 2
     const innerCircleSize = circleSize * 2
 
-    const marginRight = circleSize - (circleSize * 2 * overlap)
+    let marginRight = 0
+    if (overlap >= 0 && overlap <= 1) {
+      marginRight = circleSize - (circleSize * 2 * overlap)
+    }
 
     return (
       <Animated.View
