@@ -91,7 +91,7 @@ class Circle extends PureComponent {
 }
 
 export function renderFacePile (faces = [], numFaces) {
-  const entities = [...faces]
+  const entities = [...faces.reverse()]
   if (!entities.length) return null
 
   const facesWithImageUrls = entities.filter(e => e.imageUrl)
