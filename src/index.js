@@ -84,7 +84,7 @@ class Circle extends PureComponent {
 }
 
 export function renderFacePile (faces = [], numFaces) {
-  const entities = [...faces]
+  const entities = [...faces.reverse()]
   if (!entities.length) return null
 
   const facesWithImageUrls = entities.filter(e => e.imageUrl)
@@ -186,10 +186,7 @@ export default class FacePile extends PureComponent {
     const { render, faces, numFaces, hideOverflow, containerStyle } = this.props
     if (render) return render({ faces, numFaces })
 
-    const { facesToRender, overflow } = renderFacePile(
-      faces.reverse(),
-      numFaces
-    )
+    const { facesToRender, overflow } = renderFacePile(faces, numFaces)
 
     return (
       <View style={[styles.container, containerStyle]}>
