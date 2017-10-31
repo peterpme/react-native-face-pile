@@ -186,7 +186,10 @@ export default class FacePile extends PureComponent {
     const { render, faces, numFaces, hideOverflow, containerStyle } = this.props
     if (render) return render({ faces, numFaces })
 
-    const { facesToRender, overflow } = renderFacePile(faces, numFaces)
+    const { facesToRender, overflow } = renderFacePile(
+      faces.reverse(),
+      numFaces
+    )
 
     return (
       <View style={[styles.container, containerStyle]}>
