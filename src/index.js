@@ -201,7 +201,7 @@ export default class FacePile extends PureComponent {
     return (
       <View style={[styles.container, containerStyle]}>
         {overflow > 0 && !hideOverflow && this._renderOverflowCircle(overflow)}
-        {facesToRender.map(this._renderFace)}
+        {Array.isArray(facesToRender) && facesToRender.map(this._renderFace)}
       </View>
     )
   }
