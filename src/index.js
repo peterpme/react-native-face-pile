@@ -92,10 +92,16 @@ class Circle extends PureComponent {
 
 export function renderFacePile (faces = [], numFaces) {
   const entities = [...faces.reverse()]
-  if (!entities.length) return null
+  if (!entities.length) return {
+    facesToRender: [],
+    overflow: 0
+  }
 
   const facesWithImageUrls = entities.filter(e => e.imageUrl)
-  if (!facesWithImageUrls.length) return null
+  if (!facesWithImageUrls.length) return {
+    facesToRender: [],
+    overflow: 0
+  }
 
   const facesToRender = facesWithImageUrls.slice(0, numFaces)
   const overflow = entities.length - facesToRender.length
@@ -177,7 +183,7 @@ export default class FacePile extends PureComponent {
 
   _renderFace = (face, index, arr) => {
     const { circleStyle, imageStyle, circleSize, overlap } = this.props
-    if (!face.imageUrl) return null
+    if (face && !face.imageUrl) return null
 
     return (
       <Circle
