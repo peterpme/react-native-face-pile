@@ -8,10 +8,12 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    //backgroundColor: "#000"
   },
   circle: {
-    marginBottom: 20
+    marginBottom: 20,
+    marginRight: -31
   },
   circleImage: {
     borderWidth: 2,
@@ -21,7 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#b6c0ca',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 5
+    marginLeft: 18
   },
   overflowLabel: {
     color: '#fff',
@@ -38,38 +40,40 @@ class Circle extends PureComponent {
   }
 
   componentDidMount () {
+    /*
     const { delay } = this.props
     Animated.timing(this.state.fadeAnim, {
       toValue: 1,
       duration: 600,
       delay
-    }).start()
+    }).start()*/
   }
 
   render () {
-    const { fadeAnim } = this.state
-    const { circleStyle, imageStyle, circleSize, face, overlap } = this.props
+    //const { fadeAnim } = this.state
+    const { imageStyle, circleSize, face } = this.props
 
-    const borderRadius = circleSize / 2
+    //const borderRadius = circleSize / 2
     const innerCircleSize = circleSize * 2
 
+    /*
     let marginRight = 0
     if (overlap >= 0 && overlap <= 1) {
       marginRight = circleSize - (circleSize * 2 * overlap)
-    }
+    }*/
 
     return (
       <Animated.View
         style={[
           styles.circle,
           {
-            width: circleSize,
-            height: circleSize,
-            borderRadius: borderRadius,
-            opacity: fadeAnim,
-            marginRight
+            //width: circleSize,//innerCircleSize
+            //height: circleSize,//innerCircleSize
+            //borderRadius: borderRadius,
+            //opacity: 0.5,
+            //marginRight: marginRight*-1
           },
-          circleStyle
+          //circleStyle
         ]}
       >
         <Image
@@ -83,7 +87,7 @@ class Circle extends PureComponent {
             imageStyle
           ]}
           source={{ uri: face.imageUrl }}
-          resizeMode='contain'
+          //resizeMode='contain'
         />
       </Animated.View>
     )
@@ -150,7 +154,7 @@ export default class FacePile extends PureComponent {
       <View
         style={[
           styles.circle,
-          { width: circleSize, height: circleSize },
+          //{ width: circleSize, height: circleSize },
           circleStyle
         ]}
       >
@@ -199,7 +203,7 @@ export default class FacePile extends PureComponent {
   }
 
   render () {
-    const { render, faces, numFaces, hideOverflow, containerStyle, overlap } = this.props
+    const { render, faces, numFaces, hideOverflow, containerStyle } = this.props
     if (render) return render({ faces, numFaces })
 
     const { facesToRender, overflow } = renderFacePile(faces, numFaces)
