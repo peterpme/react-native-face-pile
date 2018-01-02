@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center',
-    //backgroundColor: "#000"
+    alignSelf: 'center'
   },
   circle: {
     marginBottom: 20,
@@ -39,42 +38,13 @@ class Circle extends PureComponent {
     fadeAnim: new Animated.Value(0)
   }
 
-  componentDidMount () {
-    /*
-    const { delay } = this.props
-    Animated.timing(this.state.fadeAnim, {
-      toValue: 1,
-      duration: 600,
-      delay
-    }).start()*/
-  }
-
   render () {
-    //const { fadeAnim } = this.state
     const { imageStyle, circleSize, face } = this.props
-
-    //const borderRadius = circleSize / 2
     const innerCircleSize = circleSize * 2
-
-    /*
-    let marginRight = 0
-    if (overlap >= 0 && overlap <= 1) {
-      marginRight = circleSize - (circleSize * 2 * overlap)
-    }*/
 
     return (
       <Animated.View
-        style={[
-          styles.circle,
-          {
-            //width: circleSize,//innerCircleSize
-            //height: circleSize,//innerCircleSize
-            //borderRadius: borderRadius,
-            //opacity: 0.5,
-            //marginRight: marginRight*-1
-          },
-          //circleStyle
-        ]}
+        style={styles.circle}
       >
         <Image
           style={[
@@ -154,7 +124,6 @@ export default class FacePile extends PureComponent {
       <View
         style={[
           styles.circle,
-          //{ width: circleSize, height: circleSize },
           circleStyle
         ]}
       >
