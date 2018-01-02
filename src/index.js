@@ -10,9 +10,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center'
   },
-  circle: {
-    marginBottom: 20
-  },
   circleImage: {
     borderWidth: 2,
     borderColor: 'white'
@@ -21,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#b6c0ca',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 5
+    marginLeft: 18
   },
   overflowLabel: {
     color: '#fff',
@@ -33,44 +30,14 @@ const styles = StyleSheet.create({
 })
 
 class Circle extends PureComponent {
-  state = {
-    fadeAnim: new Animated.Value(0)
-  }
-
-  componentDidMount () {
-    const { delay } = this.props
-    Animated.timing(this.state.fadeAnim, {
-      toValue: 1,
-      duration: 600,
-      delay
-    }).start()
-  }
-
   render () {
-    const { fadeAnim } = this.state
-    const { circleStyle, imageStyle, circleSize, face, overlap } = this.props
-
-    const borderRadius = circleSize / 2
+    const { imageStyle, circleSize, face, offset } = this.props
     const innerCircleSize = circleSize * 2
-
-    let marginRight = 0
-    if (overlap >= 0 && overlap <= 1) {
-      marginRight = circleSize - (circleSize * 2 * overlap)
-    }
+    const marginRight = circleSize * offset
 
     return (
       <Animated.View
-        style={[
-          styles.circle,
-          {
-            width: circleSize,
-            height: circleSize,
-            borderRadius: borderRadius,
-            opacity: fadeAnim,
-            marginRight
-          },
-          circleStyle
-        ]}
+        style={{ marginRight: -marginRight }}
       >
         <Image
           style={[
@@ -83,7 +50,6 @@ class Circle extends PureComponent {
             imageStyle
           ]}
           source={{ uri: face.imageUrl }}
-          resizeMode='contain'
         />
       </Animated.View>
     )
@@ -118,7 +84,7 @@ export default class FacePile extends PureComponent {
       PropTypes.shape({
         imageUrl: PropTypes.string
       })
-    ),
+    ).isRequired,
     circleSize: PropTypes.number,
     hideOverflow: PropTypes.bool,
     containerStyle: PropTypes.instanceOf(StyleSheet),
@@ -133,8 +99,9 @@ export default class FacePile extends PureComponent {
 
   static defaultProps = {
     circleSize: 20,
+    numFaces: 4,
+    overlap: 1,
     hideOverflow: false,
-    overlap: 0.5
   }
 
   _renderOverflowCircle = overflow => {
@@ -142,15 +109,17 @@ export default class FacePile extends PureComponent {
       circleStyle,
       overflowStyle,
       overflowLabelStyle,
-      circleSize
+      circleSize,
+      offset
     } = this.props
+    
     const innerCircleSize = circleSize * 2
+    const marginLeft = (circleSize * offset) - circleSize / 1.6
 
     return (
       <View
         style={[
           styles.circle,
-          { width: circleSize, height: circleSize },
           circleStyle
         ]}
       >
@@ -160,7 +129,8 @@ export default class FacePile extends PureComponent {
             {
               width: innerCircleSize,
               height: innerCircleSize,
-              borderRadius: circleSize
+              borderRadius: circleSize,
+              marginLeft: marginLeft
             },
             overflowStyle
           ]}
@@ -181,25 +151,24 @@ export default class FacePile extends PureComponent {
     )
   }
 
-  _renderFace = (face, index, arr) => {
-    const { circleStyle, imageStyle, circleSize, overlap } = this.props
+  _renderFace = (face, index) => {
+    const { circleStyle, imageStyle, circleSize, offset } = this.props
     if (face && !face.imageUrl) return null
 
     return (
       <Circle
         key={face.id || index}
-        delay={(arr.length - index) * 2}
         face={face}
         circleStyle={circleStyle}
         imageStyle={imageStyle}
         circleSize={circleSize}
-        overlap={overlap}
+        offset={offset}
       />
     )
   }
 
   render () {
-    const { render, faces, numFaces, hideOverflow, containerStyle, overlap } = this.props
+    const { render, faces, numFaces, hideOverflow, containerStyle } = this.props
     if (render) return render({ faces, numFaces })
 
     const { facesToRender, overflow } = renderFacePile(faces, numFaces)
