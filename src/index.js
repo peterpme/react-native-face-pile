@@ -10,10 +10,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center'
   },
-  circle: {
-    marginBottom: 20,
-    marginRight: -31
-  },
   circleImage: {
     borderWidth: 2,
     borderColor: 'white'
@@ -34,17 +30,14 @@ const styles = StyleSheet.create({
 })
 
 class Circle extends PureComponent {
-  state = {
-    fadeAnim: new Animated.Value(0)
-  }
-
   render () {
-    const { imageStyle, circleSize, face } = this.props
+    const { imageStyle, circleSize, face, offset } = this.props
     const innerCircleSize = circleSize * 2
+    const marginRight = circleSize * offset
 
     return (
       <Animated.View
-        style={styles.circle}
+        style={{ marginRight: -marginRight }}
       >
         <Image
           style={[
@@ -57,7 +50,6 @@ class Circle extends PureComponent {
             imageStyle
           ]}
           source={{ uri: face.imageUrl }}
-          //resizeMode='contain'
         />
       </Animated.View>
     )
@@ -92,7 +84,7 @@ export default class FacePile extends PureComponent {
       PropTypes.shape({
         imageUrl: PropTypes.string
       })
-    ),
+    ).isRequired,
     circleSize: PropTypes.number,
     hideOverflow: PropTypes.bool,
     containerStyle: PropTypes.instanceOf(StyleSheet),
@@ -107,8 +99,9 @@ export default class FacePile extends PureComponent {
 
   static defaultProps = {
     circleSize: 20,
+    numFaces: 4,
+    overlap: 1,
     hideOverflow: false,
-    overlap: 0.5
   }
 
   _renderOverflowCircle = overflow => {
@@ -116,9 +109,12 @@ export default class FacePile extends PureComponent {
       circleStyle,
       overflowStyle,
       overflowLabelStyle,
-      circleSize
+      circleSize,
+      offset
     } = this.props
+    
     const innerCircleSize = circleSize * 2
+    const marginLeft = (circleSize * offset) - circleSize / 1.6
 
     return (
       <View
@@ -133,7 +129,8 @@ export default class FacePile extends PureComponent {
             {
               width: innerCircleSize,
               height: innerCircleSize,
-              borderRadius: circleSize
+              borderRadius: circleSize,
+              marginLeft: marginLeft
             },
             overflowStyle
           ]}
@@ -154,19 +151,18 @@ export default class FacePile extends PureComponent {
     )
   }
 
-  _renderFace = (face, index, arr) => {
-    const { circleStyle, imageStyle, circleSize, overlap } = this.props
+  _renderFace = (face, index) => {
+    const { circleStyle, imageStyle, circleSize, offset } = this.props
     if (face && !face.imageUrl) return null
 
     return (
       <Circle
         key={face.id || index}
-        delay={(arr.length - index) * 2}
         face={face}
         circleStyle={circleStyle}
         imageStyle={imageStyle}
         circleSize={circleSize}
-        overlap={overlap}
+        offset={offset}
       />
     )
   }
