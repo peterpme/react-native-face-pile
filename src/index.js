@@ -93,14 +93,13 @@ export default class FacePile extends PureComponent {
     overflowStyle: PropTypes.instanceOf(StyleSheet),
     overflowLabelStyle: PropTypes.instanceOf(StyleSheet),
     render: PropTypes.func,
-    numFaces: PropTypes.number,
-    overlap: PropTypes.number
+    numFaces: PropTypes.number
   }
 
   static defaultProps = {
     circleSize: 20,
     numFaces: 4,
-    overlap: 1,
+    offset: 1,
     hideOverflow: false,
   }
 
