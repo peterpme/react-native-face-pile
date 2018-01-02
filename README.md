@@ -67,3 +67,8 @@ imageStyle: PropTypes.instanceOf(StyleSheet), // override default image styles
 overflowStyle: PropTypes.instanceOf(StyleSheet), // override default overflow circle styles
 overflowLabelStyle: PropTypes.instanceOf(StyleSheet) // override default overflow label (+8) styles
 ```
+
+## Contributors
+- @peterpme
+- @dhruska
+- @angelk90
