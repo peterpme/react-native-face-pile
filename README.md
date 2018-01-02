@@ -1,11 +1,13 @@
 # React Native Face Pile
 
-A group of overlapping round avatars are called face piles. [Try it on Snack](https://snack.expo.io/@peterpme/react-native-face-pile-example)
+A group of overlapping round avatars are called face piles.
 
 [![npm version](https://badge.fury.io/js/react-native-face-pile.svg)](https://badge.fury.io/js/react-native-face-pile)
 
-
 ![Facepile Image](/screenshots/facepile.png)
+
+[Try it on Snack](https://snack.expo.io/@peterpme/react-native-face-pile-example)
+![Facepile Image](/screenshots/qrcode.png)
 
 ## Installation
 
@@ -76,3 +78,4 @@ overflowLabelStyle: PropTypes.instanceOf(StyleSheet) // override default overflo
 - @peterpme
 - @dhruska
 - @angelk90
+
