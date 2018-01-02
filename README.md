@@ -25,21 +25,25 @@ import FacePile from 'react-native-face-pile'
 const FACES = [
   {
     id: 0,
-    imageUrl: 'https://lorempixel.com/200/200/people'
+    imageUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/vista/128.jpg',
   },
   {
     id: 1,
-    imageUrl: 'https://lorempixel.com/200/203/people'
+    imageUrl: 'http://www.yojackets.com/wp-content/uploads/2016/04/Civil-War-Scarlet-Witch-Red-Coat-1.jpg',
   },
   {
     id: 2,
-    imageUrl: 'https://lorempixel.com/200/201/people'
+    imageUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg',
   },
   {
     id: 3,
-    imageUrl: 'https://lorempixel.com/200/202/people'
+    imageUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/k/128.jpg',
+  },
+  {
+    id: 4,
+    imageUrl: 'https://pbs.twimg.com/profile_images/885357926373654528/4tGgnF71_bigger.jpg',
   }
-]
+];
 
 <FacePile numFaces={3} faces={FACES} />
 ```
