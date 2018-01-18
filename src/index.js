@@ -113,7 +113,7 @@ export default class FacePile extends PureComponent {
     } = this.props
     
     const innerCircleSize = circleSize * 2
-    const marginLeft = (circleSize * offset) - circleSize / 1.6
+    const marginLeft = (circleSize * offset) - circleSize / 1.4
 
     return (
       <View
